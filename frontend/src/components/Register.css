@@ -1,0 +1,85 @@
+.register-container {
+  max-width: 400px;
+  margin: 5% auto;
+  padding: 30px;
+  background-color: #f8f5ee;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(139, 195, 74, 0.2);
+  background-image: url('https://img.icons8.com/ios/50/000000/tractor.png');
+  background-repeat: no-repeat;
+  background-position: right 20px top 20px;
+  background-size: 40px;
+  border: 1px solid #c8e6c9;
+}
+
+.register-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #5d4037;
+  font-family: 'Trebuchet MS', sans-serif;
+  text-shadow: 1px 1px 2px #dcedc8;
+}
+
+/* Reuse the same form styles as login for consistency */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #689f38;
+  font-weight: bold;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #a5d6a7;
+  border-radius: 5px;
+  background-color: #f1f8e9;
+  box-sizing: border-box;
+  transition: all 0.3s;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #689f38;
+  box-shadow: 0 0 8px rgba(104, 159, 56, 0.3);
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: #8d6e63; /* Earth brown instead of green */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  letter-spacing: 1px;
+  transition: all 0.3s;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #6d4c41; /* Darker brown */
+  transform: translateY(-2px);
+}
+
+p {
+  text-align: center;
+  margin-top: 20px;
+  color: #5d4037;
+}
+
+p span {
+  color: #689f38;
+  cursor: pointer;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+p span:hover {
+  color: #33691e;
+}

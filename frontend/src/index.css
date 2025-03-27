@@ -1,0 +1,66 @@
+:root {
+  --soil-dark: #3E2723;
+  --soil-medium: #5D4037;
+  --soil-light: #8D6E63;
+  --leaf-dark: #2E7D32;
+  --leaf-medium: #388E3C;
+  --leaf-light: #81C784;
+  --sun-accent: #FFA000;
+  --sky-light: #E3F2FD;
+  --text-primary: #212121;
+  --text-secondary: #757575;
+  --white: #FAFAFA;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--white);
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+/* Responsive base font size */
+html {
+  font-size: 16px;
+}
+@media (max-width: 768px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+/* Button styles */
+.btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: var(--leaf-medium);
+  color: white;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: var(--leaf-dark);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(46, 125, 50, 0.3);
+}
+
+/* Form elements */
+input, select {
+  padding: 0.75rem;
+  border: 1px solid #BDBDBD;
+  border-radius: 4px;
+  background-color: white;
+  transition: all 0.3s ease;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--leaf-medium);
+  box-shadow: 0 0 0 2px rgba(56, 142, 60, 0.2);
+}

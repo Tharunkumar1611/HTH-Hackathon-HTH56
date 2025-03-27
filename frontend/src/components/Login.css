@@ -1,0 +1,84 @@
+.login-container {
+  max-width: 400px;
+  margin: 5% auto;
+  padding: 30px;
+  background-color: #f8f5ee; /* Soft parchment color */
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(139, 195, 74, 0.2);
+  background-image: url('https://img.icons8.com/ios/50/000000/wheat.png');
+  background-repeat: no-repeat;
+  background-position: right 20px top 20px;
+  background-size: 40px;
+  border: 1px solid #c8e6c9; /* Light green border */
+}
+
+.login-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #5d4037; /* Brown text */
+  font-family: 'Trebuchet MS', sans-serif;
+  text-shadow: 1px 1px 2px #dcedc8;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #689f38; /* Leaf green */
+  font-weight: bold;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #a5d6a7; /* Light green border */
+  border-radius: 5px;
+  background-color: #f1f8e9; /* Very light green */
+  box-sizing: border-box;
+  transition: all 0.3s;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #689f38; /* Darker green */
+  box-shadow: 0 0 8px rgba(104, 159, 56, 0.3);
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: #689f38; /* Leaf green */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  letter-spacing: 1px;
+  transition: all 0.3s;
+  margin-top: 10px;
+}
+
+button:hover {
+  background-color: #558b2f; /* Darker green */
+  transform: translateY(-2px);
+}
+
+p {
+  text-align: center;
+  margin-top: 20px;
+  color: #5d4037; /* Brown */
+}
+
+p span {
+  color: #689f38; /* Leaf green */
+  cursor: pointer;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+p span:hover {
+  color: #33691e; /* Dark green */
+}
