@@ -4,7 +4,7 @@ import {
   WiDaySunny, WiRain, WiCloudy, WiDayCloudyHigh,
   WiHumidity, WiStrongWind 
 } from 'weather-icons-react';
-import { FaLeaf, FaBug, FaMoneyBillWave, FaUpload } from 'react-icons/fa';
+import { FaLeaf, FaBug, FaMoneyBillWave, FaUpload, FaRupeeSign, FaInfoCircle } from 'react-icons/fa';
 
 function Dashboard() {
   // Weather state
@@ -30,6 +30,9 @@ function Dashboard() {
     crop: '',
     district: ''
   });
+
+  // Schemes modal state
+  const [showSchemes, setShowSchemes] = useState(false);
 
   // Tamil Nadu districts
   const tamilNaduDistricts = [
@@ -60,8 +63,35 @@ function Dashboard() {
     'July', 'August', 'September', 'October', 'November', 'December'
   ];
 
+  const tamilNaduSchemes = [
+    {
+      name: "Chief Minister's Dryland Farming Scheme",
+      description: "Provides assistance for dryland farmers with 50% subsidy for inputs",
+      link: "https://www.tn.gov.in/scheme/data_view/336"
+    },
+    {
+      name: "National Mission on Sustainable Agriculture",
+      description: "Promotes sustainable agriculture practices with financial assistance",
+      link: "https://nmsa.dac.gov.in/"
+    },
+    {
+      name: "Tamil Nadu Organic Farming Policy",
+      description: "Encourages organic farming with training and certification support",
+      link: "https://www.tn.gov.in/scheme/data_view/342"
+    },
+    {
+      name: "Pradhan Mantri Fasal Bima Yojana",
+      description: "Crop insurance scheme to protect against natural calamities",
+      link: "https://pmfby.gov.in/"
+    },
+    {
+      name: "Kisan Credit Card Scheme",
+      description: "Provides affordable credit to farmers for agricultural needs",
+      link: "https://www.rbi.org.in/Scripts/FAQView.aspx?Id=80"
+    }
+  ];
+
   useEffect(() => {
-    // Mock weather data
     const fetchWeather = async () => {
       try {
         await new Promise(resolve => setTimeout(resolve, 1000));
@@ -112,25 +142,54 @@ function Dashboard() {
   const handleCropSubmit = (e) => {
     e.preventDefault();
     console.log('Crop Prediction Form:', cropForm);
-    // Here you would call your ML model API
+    // API call would go here
   };
 
   const handlePesticideSubmit = (e) => {
     e.preventDefault();
     console.log('Pesticide Prediction Form:', pesticideForm);
-    // Here you would call your ML model API
+    // API call would go here
   };
 
   const handlePriceSubmit = (e) => {
     e.preventDefault();
     console.log('Price Prediction Form:', priceForm);
-    // Here you would call your ML model API
+    // API call would go here
+  };
+
+  const toggleSchemes = () => {
+    setShowSchemes(!showSchemes);
   };
 
   return (
     <div className="dashboard-container">
-      <h1 className="dashboard-title">Agriculture Intelligence Dashboard</h1>
+      <div className="dashboard-header">
+        <h1 className="dashboard-title">Agriculture Intelligence Dashboard</h1>
+        <button onClick={toggleSchemes} className="schemes-btn">
+          <FaRupeeSign /> Tamil Nadu Schemes
+        </button>
+      </div>
       
+      {showSchemes && (
+        <div className="schemes-modal">
+          <div className="schemes-content">
+            <h2><FaInfoCircle color="#689f38" /> Tamil Nadu Agricultural Schemes</h2>
+            <button className="close-btn" onClick={toggleSchemes}>×</button>
+            <div className="schemes-list">
+              {tamilNaduSchemes.map((scheme, index) => (
+                <div key={index} className="scheme-card">
+                  <h3>{scheme.name}</h3>
+                  <p>{scheme.description}</p>
+                  <a href={scheme.link} target="_blank" rel="noopener noreferrer">
+                    Learn More
+                  </a>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
       <div className="dashboard-grid">
         {/* Weather Widget */}
         <div className="dashboard-card weather-widget">

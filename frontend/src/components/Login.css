@@ -1,84 +1,80 @@
-.login-container {
-  max-width: 400px;
-  margin: 5% auto;
+.auth-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #F5F5DC; /* Light beige farm soil theme */
+}
+
+.auth-box {
+  width: 400px;
+  background-color: #F8F5EE;
   padding: 30px;
-  background-color: #f8f5ee; /* Soft parchment color */
   border-radius: 10px;
-  box-shadow: 0 0 15px rgba(139, 195, 74, 0.2);
-  background-image: url('https://img.icons8.com/ios/50/000000/wheat.png');
-  background-repeat: no-repeat;
-  background-position: right 20px top 20px;
-  background-size: 40px;
-  border: 1px solid #c8e6c9; /* Light green border */
-}
-
-.login-container h2 {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   text-align: center;
-  margin-bottom: 25px;
-  color: #5d4037; /* Brown text */
-  font-family: 'Trebuchet MS', sans-serif;
-  text-shadow: 1px 1px 2px #dcedc8;
+  border: 1px solid #A5D6A7;
 }
 
-.form-group {
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.logo-container img {
+  width: 40px;
+}
+
+h2 {
+  color: #5D4037;
+  font-family: 'Trebuchet MS', sans-serif;
   margin-bottom: 20px;
 }
 
+.form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+
 .form-group label {
-  display: block;
-  margin-bottom: 8px;
-  color: #689f38; /* Leaf green */
   font-weight: bold;
+  color: #689F38;
 }
 
 .form-group input {
   width: 100%;
-  padding: 12px;
-  border: 2px solid #a5d6a7; /* Light green border */
+  padding: 10px;
+  border: 2px solid #A5D6A7;
   border-radius: 5px;
-  background-color: #f1f8e9; /* Very light green */
-  box-sizing: border-box;
-  transition: all 0.3s;
-}
-
-.form-group input:focus {
-  outline: none;
-  border-color: #689f38; /* Darker green */
-  box-shadow: 0 0 8px rgba(104, 159, 56, 0.3);
+  background-color: #F1F8E9;
 }
 
 button {
   width: 100%;
   padding: 12px;
-  background-color: #689f38; /* Leaf green */
+  background-color: #8D6E63;
   color: white;
   border: none;
   border-radius: 5px;
-  cursor: pointer;
   font-weight: bold;
-  letter-spacing: 1px;
-  transition: all 0.3s;
-  margin-top: 10px;
+  cursor: pointer;
 }
 
 button:hover {
-  background-color: #558b2f; /* Darker green */
-  transform: translateY(-2px);
+  background-color: #6D4C41;
 }
 
 p {
-  text-align: center;
-  margin-top: 20px;
-  color: #5d4037; /* Brown */
+  margin-top: 15px;
+  color: #5D4037;
 }
 
 p span {
-  color: #689f38; /* Leaf green */
+  color: #689F38;
   cursor: pointer;
-  text-decoration: underline;
   font-weight: bold;
-}
-
-p span:hover {
-  color: #33691e; /* Dark green */
+  text-decoration: underline;
 }
