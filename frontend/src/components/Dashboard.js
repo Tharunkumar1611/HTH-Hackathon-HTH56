@@ -31,6 +31,11 @@ function Dashboard() {
     district: ''
   });
 
+  // Results states
+  const [cropResult, setCropResult] = useState(null);
+  const [priceResult, setPriceResult] = useState(null);
+  const [pesticideResult, setPesticideResult] = useState(null);
+
   // Schemes modal state
   const [showSchemes, setShowSchemes] = useState(false);
 
@@ -61,6 +66,22 @@ function Dashboard() {
   const months = [
     'January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'
+  ];
+
+  const commonPests = [
+    'Aphids', 'Whiteflies', 'Bollworms', 'Stem Borers', 'Leaf Miners',
+    'Thrips', 'Mealybugs', 'Mites', 'Cutworms', 'Armyworms'
+  ];
+
+  const pesticides = [
+    { name: 'Neem Oil', type: 'Organic', effectiveness: 'High' },
+    { name: 'Chlorpyrifos', type: 'Chemical', effectiveness: 'Very High' },
+    { name: 'Imidacloprid', type: 'Chemical', effectiveness: 'High' },
+    { name: 'Spinosad', type: 'Biological', effectiveness: 'Medium' },
+    { name: 'Pyrethrin', type: 'Organic', effectiveness: 'Medium' },
+    { name: 'Deltamethrin', type: 'Chemical', effectiveness: 'Very High' },
+    { name: 'Azadirachtin', type: 'Organic', effectiveness: 'Medium' },
+    { name: 'Bacillus Thuringiensis', type: 'Biological', effectiveness: 'High' }
   ];
 
   const tamilNaduSchemes = [
@@ -142,19 +163,66 @@ function Dashboard() {
   const handleCropSubmit = (e) => {
     e.preventDefault();
     console.log('Crop Prediction Form:', cropForm);
-    // API call would go here
+    
+    // Generate single random crop suggestion
+    const randomCrop = crops[Math.floor(Math.random() * crops.length)];
+    const suitability = Math.floor(Math.random() * 80) + 20; // Random suitability percentage (20-100)
+    
+    setCropResult({
+      district: cropForm.district,
+      month: cropForm.month,
+      soilType: cropForm.soilType,
+      recommendedCrop: {
+        name: randomCrop,
+        suitability: suitability
+      }
+    });
   };
 
   const handlePesticideSubmit = (e) => {
     e.preventDefault();
     console.log('Pesticide Prediction Form:', pesticideForm);
-    // API call would go here
+    
+    // Generate random pest and pesticide recommendation
+    const randomPest = commonPests[Math.floor(Math.random() * commonPests.length)];
+    const randomPesticide = pesticides[Math.floor(Math.random() * pesticides.length)];
+    const severity = ['Low', 'Medium', 'High'][Math.floor(Math.random() * 3)];
+    
+    setPesticideResult({
+      pest: randomPest,
+      severity: severity,
+      recommendedPesticide: randomPesticide,
+      application: `Apply ${randomPesticide.name} every ${[3,5,7,10][Math.floor(Math.random() * 4)]} days for ${[1,2,3][Math.floor(Math.random() * 3)]} weeks`
+    });
   };
 
   const handlePriceSubmit = (e) => {
     e.preventDefault();
     console.log('Price Prediction Form:', priceForm);
-    // API call would go here
+    
+    // Generate random price prediction
+    const basePrice = {
+      'Rice': 1800, 'Wheat': 1600, 'Maize': 1500, 'Cotton': 5500, 'Sugarcane': 2800,
+      'Groundnut': 4500, 'Pulses': 6000, 'Millets': 3500, 'Oilseeds': 5000, 'Vegetables': 2500,
+      'Fruits': 4000, 'Spices': 8000, 'Flowers': 10000, 'Tea': 200, 'Coffee': 350
+    };
+    
+    const base = basePrice[priceForm.crop] || 3000;
+    const min = Math.floor(base * 0.8);
+    const max = Math.floor(base * 1.2);
+    const current = Math.floor(Math.random() * (max - min + 1)) + min;
+    const trend = ['up', 'down', 'stable'][Math.floor(Math.random() * 3)];
+    const percentage = Math.floor(Math.random() * 15) + 5;
+    
+    setPriceResult({
+      crop: priceForm.crop,
+      district: priceForm.district,
+      currentPrice: current,
+      priceRange: `${min} - ${max}`,
+      trend: trend,
+      percentageChange: percentage,
+      suggestion: trend === 'up' ? 'Good time to sell' : trend === 'down' ? 'Consider waiting' : 'Prices stable'
+    });
   };
 
   const toggleSchemes = () => {
@@ -261,9 +329,26 @@ function Dashboard() {
             </div>
             
             <button type="submit" className="submit-btn">
-              Predict Suitable Crops
+              Predict Suitable Crop
             </button>
           </form>
+
+          {cropResult && (
+            <div className="result-container">
+              <h3>Recommended Crop for {cropResult.district} in {cropResult.month}</h3>
+              <p>Soil Type: {cropResult.soilType}</p>
+              <div className="crop-result">
+                <div className="crop-name">{cropResult.recommendedCrop.name}</div>
+                <div className="suitability-bar">
+                  <div 
+                    className="suitability-fill" 
+                    style={{ width: `${cropResult.recommendedCrop.suitability}%` }}
+                  ></div>
+                  <span className="suitability-percent">{cropResult.recommendedCrop.suitability}% suitability</span>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Pesticide Prediction */}
@@ -303,6 +388,26 @@ function Dashboard() {
               Recommend Pesticide
             </button>
           </form>
+
+          {pesticideResult && (
+            <div className="result-container">
+              <h3>Pest Analysis</h3>
+              <div className="pest-info">
+                <p><strong>Identified Pest:</strong> {pesticideResult.pest}</p>
+                <p><strong>Severity:</strong> <span className={`severity-${pesticideResult.severity.toLowerCase()}`}>
+                  {pesticideResult.severity}
+                </span></p>
+              </div>
+              
+              <h4>Recommended Treatment</h4>
+              <div className="pesticide-info">
+                <p><strong>Pesticide:</strong> {pesticideResult.recommendedPesticide.name}</p>
+                <p><strong>Type:</strong> {pesticideResult.recommendedPesticide.type}</p>
+                <p><strong>Effectiveness:</strong> {pesticideResult.recommendedPesticide.effectiveness}</p>
+                <p><strong>Application:</strong> {pesticideResult.application}</p>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Price Prediction */}
@@ -343,6 +448,23 @@ function Dashboard() {
               Predict Market Price
             </button>
           </form>
+
+          {priceResult && (
+            <div className="result-container">
+              <h3>Price Analysis for {priceResult.crop} in {priceResult.district}</h3>
+              <div className="price-info">
+                <p><strong>Current Price:</strong> ₹{priceResult.currentPrice}/quintal</p>
+                <p><strong>Expected Range:</strong> ₹{priceResult.priceRange}/quintal</p>
+                <p>
+                  <strong>Trend:</strong> 
+                  <span className={`trend-${priceResult.trend}`}>
+                    {priceResult.trend} ({priceResult.percentageChange}%)
+                  </span>
+                </p>
+                <p className="suggestion"><strong>Suggestion:</strong> {priceResult.suggestion}</p>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

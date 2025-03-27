@@ -360,3 +360,117 @@
 }
 
   }
+
+  /* Results Container */
+/* Results Container */
+.result-container {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f8f5ee;
+    border-radius: 8px;
+    border-left: 4px solid #689f38;
+  }
+  
+  .result-container h3 {
+    color: #5d4037;
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+  }
+  
+  .result-container h4 {
+    color: #5d4037;
+    margin-bottom: 10px;
+    font-size: 1rem;
+  }
+  
+  /* Single Crop Result */
+  .crop-result {
+    margin-top: 15px;
+  }
+  
+  .crop-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #5d4037;
+    margin-bottom: 10px;
+  }
+  
+  .suitability-bar {
+    height: 20px;
+    background-color: #e0e0e0;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .suitability-fill {
+    height: 100%;
+    background-color: #689f38;
+    border-radius: 10px;
+    transition: width 0.5s ease;
+  }
+  
+  .suitability-percent {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: bold;
+  }
+  
+  /* Rest of your existing CSS remains the same */
+  /* Pest Results */
+  .pest-info, .pesticide-info {
+    margin-bottom: 15px;
+  }
+  
+  .pest-info p, .pesticide-info p {
+    margin: 5px 0;
+    color: #5d4037;
+  }
+  
+  .severity-low {
+    color: #689f38;
+    font-weight: 500;
+  }
+  
+  .severity-medium {
+    color: #ff9800;
+    font-weight: 500;
+  }
+  
+  .severity-high {
+    color: #f44336;
+    font-weight: 500;
+  }
+  
+  /* Price Results */
+  .price-info p {
+    margin: 8px 0;
+    color: #5d4037;
+  }
+  
+  .trend-up {
+    color: #689f38;
+    font-weight: 500;
+  }
+  
+  .trend-down {
+    color: #f44336;
+    font-weight: 500;
+  }
+  
+  .trend-stable {
+    color: #2196f3;
+    font-weight: 500;
+  }
+  
+  .suggestion {
+    font-style: italic;
+    margin-top: 15px !important;
+    padding-top: 10px;
+    border-top: 1px dashed #c8e6c9;
+  }
