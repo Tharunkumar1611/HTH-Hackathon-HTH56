@@ -3,29 +3,29 @@
     margin: 2% auto;
     padding: 20px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-  
-  /* Dashboard Header */
-  .dashboard-header {
+}
+
+/* Dashboard Header */
+.dashboard-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 30px;
     flex-wrap: wrap;
     gap: 20px;
-  }
-  
-  .dashboard-title {
+}
+
+.dashboard-title {
     color: #5d4037;
     font-family: 'Trebuchet MS', sans-serif;
     text-align: center;
     margin: 0;
     font-size: 2.2rem;
     text-shadow: 1px 1px 3px #dcedc8;
-  }
-  
-  /* Schemes Button */
-  .schemes-btn {
+}
+
+/* Schemes Button */
+.schemes-btn {
     background-color: #2e7d32;
     color: white;
     border: none;
@@ -38,16 +38,51 @@
     gap: 8px;
     transition: all 0.3s ease;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  }
-  
-  .schemes-btn:hover {
+}
+
+.schemes-btn:hover {
     background-color: #1b5e20;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-  }
-  
-  /* Schemes Modal */
-  .schemes-modal {
+}
+
+/* Disease Alert Notification */
+.disease-alert {
+    background-color: #fff3cd; /* Light background for alert */
+    border-left: 5px solid #ffc107; /* Yellow left border */
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    position: relative;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow for depth */
+}
+
+.alert-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.alert-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.alert-icon {
+    color: #ffc107; /* Yellow color for alert icon */
+    font-size: 24px;
+}
+
+.alert-close {
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #757575;
+}
+
+/* Disease Alerts Modal */
+.alerts-modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -59,9 +94,9 @@
     align-items: center;
     z-index: 1000;
     padding: 20px;
-  }
-  
-  .schemes-content {
+}
+
+.alerts-content {
     background-color: white;
     padding: 30px;
     border-radius: 10px;
@@ -71,108 +106,79 @@
     overflow-y: auto;
     position: relative;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-  }
-  
-  .schemes-content h2 {
+}
+
+.alerts-content h2 {
     color: #5d4037;
     margin-bottom: 20px;
     display: flex;
     align-items: center;
     gap: 10px;
     font-size: 1.5rem;
-  }
-  
-  .close-btn {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: #757575;
-    transition: color 0.2s;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-  }
-  
-  .close-btn:hover {
-    background-color: #f5f5f5;
-    color: #d32f2f;
-  }
-  
-  .schemes-list {
-    display: grid;
-    gap: 15px;
-  }
-  
-  .scheme-card {
-    background-color: #f8f5ee;
-    padding: 20px;
+}
+
+.alerts-list {
+    margin-top: 15px;
+}
+
+.alert-card {
+    background-color: #f8f5ee; /* Light background for alert cards */
+    padding: 15px;
     border-radius: 8px;
-    border-left: 4px solid #689f38;
+    border-left: 4px solid #689f38; /* Green left border */
+    margin-bottom: 10px;
     transition: transform 0.2s;
-  }
-  
-  .scheme-card:hover {
+}
+
+.alert-card:hover {
     transform: translateY(-3px);
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  }
-  
-  .scheme-card h3 {
-    color: #5d4037;
-    margin-bottom: 10px;
-    font-size: 1.1rem;
-  }
-  
-  .scheme-card p {
-    color: #5d4037;
-    margin-bottom: 10px;
-    font-size: 0.95rem;
-    line-height: 1.5;
-  }
-  
-  .scheme-card a {
-    color: #2e7d32;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.9rem;
-    display: inline-flex;
+}
+
+.alert-card-header {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 5px;
-  }
-  
-  .scheme-card a:hover {
-    text-decoration: underline;
-  }
-  
-  /* Grid Layout */
-  .dashboard-grid {
+}
+
+.severity-low {
+    color: #689f38; /* Green for low severity */
+    font-weight: 500;
+}
+
+.severity-medium {
+    color: #ff9800; /* Orange for medium severity */
+    font-weight: 500;
+}
+
+.severity-high {
+    color: #f44336; /* Red for high severity */
+    font-weight: 500;
+}
+
+/* Grid Layout */
+.dashboard-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 25px;
-  }
-  
-  /* Dashboard Card */
-  .dashboard-card {
+}
+
+/* Dashboard Card */
+.dashboard-card {
     background-color: white;
     padding: 25px;
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(139, 195, 74, 0.15);
     border: 1px solid #e0e0e0;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .dashboard-card:hover {
+}
+
+.dashboard-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 5px 20px rgba(139, 195, 74, 0.25);
-  }
-  
-  .dashboard-card h2 {
+}
+
+.dashboard-card h2 {
     color: #5d4037;
     font-family: 'Trebuchet MS', sans-serif;
     margin-bottom: 20px;
@@ -182,55 +188,55 @@
     display: flex;
     align-items: center;
     gap: 10px;
-  }
-  
-  /* Weather Widget Styles */
-  .weather-widget {
+}
+
+/* Weather Widget Styles */
+.weather-widget {
     grid-column: span 1;
-  }
-  
-  .weather-icon {
+}
+
+.weather-icon {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 15px;
     margin: 20px 0;
-  }
-  
-  .temperature {
+}
+
+.temperature {
     font-size: 2rem;
     font-weight: bold;
     color: #5d4037;
-  }
-  
-  .weather-details p {
+}
+
+.weather-details p {
     margin: 10px 0;
     color: #5d4037;
     font-size: 1rem;
     display: flex;
     align-items: center;
     gap: 8px;
-  }
-  
-  .weather-details strong {
+}
+
+.weather-details strong {
     color: #689f38;
-  }
-  
-  /* Form Styles */
-  .form-group {
+}
+
+/* Form Styles */
+.form-group {
     margin-bottom: 20px;
-  }
-  
-  .form-group label {
+}
+
+.form-group label {
     display: block;
     margin-bottom: 8px;
     color: #689f38;
     font-weight: 500;
     font-size: 0.95rem;
-  }
-  
-  .form-group select,
-  .form-group textarea {
+}
+
+.form-group select,
+.form-group textarea {
     width: 100%;
     padding: 12px;
     border: 1px solid #c8e6c9;
@@ -238,28 +244,28 @@
     background-color: #f8f5ee;
     font-size: 0.95rem;
     transition: all 0.3s ease;
-  }
-  
-  .form-group select:focus,
-  .form-group textarea:focus {
+}
+
+.form-group select:focus,
+.form-group textarea:focus {
     outline: none;
     border-color: #689f38;
     box-shadow: 0 0 0 3px rgba(104, 159, 56, 0.2);
-  }
-  
-  .form-group textarea {
+}
+
+.form-group textarea {
     resize: vertical;
     min-height: 100px;
-  }
-  
-  /* File Upload Styles */
-  .file-upload {
+}
+
+/* File Upload Styles */
+.file-upload {
     display: flex;
     align-items: center;
     gap: 10px;
-  }
-  
-  .file-upload label {
+}
+
+.file-upload label {
     background-color: #689f38;
     color: white;
     padding: 10px 15px;
@@ -270,20 +276,20 @@
     gap: 8px;
     font-size: 0.9rem;
     transition: all 0.2s ease;
-  }
-  
-  .file-upload label:hover {
+}
+
+.file-upload label:hover {
     background-color: #558b2f;
-  }
-  
-  .file-name {
+}
+
+.file-name {
     font-size: 0.85rem;
     color: #5d4037;
     word-break: break-all;
-  }
-  
-  /* Submit Button */
-  .submit-btn {
+}
+
+/* Submit Button */
+.submit-btn {
     width: 100%;
     padding: 14px;
     background-color: #689f38;
@@ -297,21 +303,21 @@
     margin-top: 10px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-  }
-  
-  .submit-btn:hover {
+}
+
+.submit-btn:hover {
     background-color: #558b2f;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  }
-  
-  /* Loading Animation */
-  @keyframes spin {
+}
+
+/* Loading Animation */
+@keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
-  }
-  
-  .loading-spinner {
+}
+
+.loading-spinner {
     border: 4px solid rgba(0, 0, 0, 0.1);
     border-radius: 50%;
     border-top: 4px solid #689f38;
@@ -319,49 +325,47 @@
     height: 30px;
     animation: spin 1s linear infinite;
     margin: 0 auto;
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .dashboard-container {
-      margin: 10px;
-      padding: 15px;
-    }
-  
-    .dashboard-header {
-      flex-direction: column;
-      align-items: stretch;
-    }
-  
-    .dashboard-title {
-      font-size: 1.8rem;
-      margin-bottom: 15px;
-    }
-  
-    .schemes-btn {
-      width: 100%;
-      justify-content: center;
-    }
-  
-    .dashboard-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-  
-  @media (min-width: 992px) {
-    .dashboard-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  
-    .weather-widget {
-  height: auto; /* Automatically adjust based on content */
-  min-height: unset; /* Remove any unnecessary minimum height */
-  padding-bottom: 10px; /* Reduce extra bottom spacing */
 }
 
-  }
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dashboard-container {
+        margin: 10px;
+        padding: 15px;
+    }
 
-  /* Results Container */
+    .dashboard-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .dashboard-title {
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+    }
+
+    .schemes-btn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (min-width: 992px) {
+    .dashboard-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .weather-widget {
+        height: auto; /* Automatically adjust based on content */
+        min-height: unset; /* Remove any unnecessary minimum height */
+        padding-bottom: 10px; /* Reduce extra bottom spacing */
+    }
+}
+
 /* Results Container */
 .result-container {
     margin-top: 20px;
@@ -369,49 +373,49 @@
     background-color: #f8f5ee;
     border-radius: 8px;
     border-left: 4px solid #689f38;
-  }
-  
-  .result-container h3 {
+}
+
+.result-container h3 {
     color: #5d4037;
     margin-top: 0;
     margin-bottom: 10px;
     font-size: 1.1rem;
-  }
-  
-  .result-container h4 {
+}
+
+.result-container h4 {
     color: #5d4037;
     margin-bottom: 10px;
     font-size: 1rem;
-  }
-  
-  /* Single Crop Result */
-  .crop-result {
+}
+
+/* Single Crop Result */
+.crop-result {
     margin-top: 15px;
-  }
-  
-  .crop-name {
+}
+
+.crop-name {
     font-size: 1.2rem;
     font-weight: 600;
     color: #5d4037;
     margin-bottom: 10px;
-  }
-  
-  .suitability-bar {
+}
+
+.suitability-bar {
     height: 20px;
     background-color: #e0e0e0;
     border-radius: 10px;
     position: relative;
     overflow: hidden;
-  }
-  
-  .suitability-fill {
+}
+
+.suitability-fill {
     height: 100%;
     background-color: #689f38;
     border-radius: 10px;
     transition: width 0.5s ease;
-  }
-  
-  .suitability-percent {
+}
+
+.suitability-percent {
     position: absolute;
     right: 5px;
     top: 50%;
@@ -419,58 +423,57 @@
     color: white;
     font-size: 0.7rem;
     font-weight: bold;
-  }
-  
-  /* Rest of your existing CSS remains the same */
-  /* Pest Results */
-  .pest-info, .pesticide-info {
+}
+
+/* Pest Results */
+.pest-info, .pesticide-info {
     margin-bottom: 15px;
-  }
-  
-  .pest-info p, .pesticide-info p {
+}
+
+.pest-info p, .pesticide-info p {
     margin: 5px 0;
     color: #5d4037;
-  }
-  
-  .severity-low {
-    color: #689f38;
+}
+
+.severity-low {
+    color: #689f38; /* Green for low severity */
     font-weight: 500;
-  }
-  
-  .severity-medium {
-    color: #ff9800;
+}
+
+.severity-medium {
+    color: #ff9800; /* Orange for medium severity */
     font-weight: 500;
-  }
-  
-  .severity-high {
-    color: #f44336;
+}
+
+.severity-high {
+    color: #f44336; /* Red for high severity */
     font-weight: 500;
-  }
-  
-  /* Price Results */
-  .price-info p {
+}
+
+/* Price Results */
+.price-info p {
     margin: 8px 0;
     color: #5d4037;
-  }
-  
-  .trend-up {
-    color: #689f38;
+}
+
+.trend-up {
+    color: #689f38; /* Green for upward trend */
     font-weight: 500;
-  }
-  
-  .trend-down {
-    color: #f44336;
+}
+
+.trend-down {
+    color: #f44336; /* Red for downward trend */
     font-weight: 500;
-  }
-  
-  .trend-stable {
-    color: #2196f3;
+}
+
+.trend-stable {
+    color: #2196f3; /* Blue for stable trend */
     font-weight: 500;
-  }
-  
-  .suggestion {
+}
+
+.suggestion {
     font-style: italic;
     margin-top: 15px !important;
     padding-top: 10px;
     border-top: 1px dashed #c8e6c9;
-  }
+}

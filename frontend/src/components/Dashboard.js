@@ -4,7 +4,7 @@ import {
   WiDaySunny, WiRain, WiCloudy, WiDayCloudyHigh,
   WiHumidity, WiStrongWind 
 } from 'weather-icons-react';
-import { FaLeaf, FaBug, FaMoneyBillWave, FaUpload, FaRupeeSign, FaInfoCircle } from 'react-icons/fa';
+import { FaLeaf, FaBug, FaMoneyBillWave, FaUpload, FaRupeeSign, FaInfoCircle, FaBell, FaMapMarkerAlt } from 'react-icons/fa';
 
 function Dashboard() {
   // Weather state
@@ -38,6 +38,11 @@ function Dashboard() {
 
   // Schemes modal state
   const [showSchemes, setShowSchemes] = useState(false);
+
+  // Disease alert states
+  const [diseaseAlert, setDiseaseAlert] = useState(null);
+  const [showAlerts, setShowAlerts] = useState(false);
+  const [userLocation, setUserLocation] = useState('Coimbatore');
 
   // Tamil Nadu districts
   const tamilNaduDistricts = [
@@ -112,6 +117,39 @@ function Dashboard() {
     }
   ];
 
+  const sampleDiseaseAlerts = [
+    {
+      id: 1,
+      disease: 'Tomato Leaf Curl Virus',
+      district: 'Coimbatore',
+      date: '2023-06-15',
+      severity: 'High',
+      distance: '5 km',
+      farmsAffected: 12,
+      recommendedAction: 'Remove infected plants, use neem-based pesticides'
+    },
+    {
+      id: 2,
+      disease: 'Rice Blast',
+      district: 'Thanjavur',
+      date: '2023-06-10',
+      severity: 'Medium',
+      distance: '25 km',
+      farmsAffected: 8,
+      recommendedAction: 'Apply fungicides containing tricyclazole'
+    },
+    {
+      id: 3,
+      disease: 'Banana Fusarium Wilt',
+      district: 'Tiruchirapalli',
+      date: '2023-06-05',
+      severity: 'High',
+      distance: '50 km',
+      farmsAffected: 15,
+      recommendedAction: 'Use disease-free planting material, soil solarization'
+    }
+  ];
+
   useEffect(() => {
     const fetchWeather = async () => {
       try {
@@ -130,7 +168,31 @@ function Dashboard() {
     };
 
     fetchWeather();
-  }, []);
+
+    // Check if user's district has any alerts
+    const userDistrictAlert = sampleDiseaseAlerts.find(
+      alert => alert.district === userLocation
+    );
+    
+    if (userDistrictAlert) {
+      setDiseaseAlert(userDistrictAlert);
+    }
+
+    // Simulate periodic alerts (every 2 minutes in this demo)
+    const alertInterval = setInterval(() => {
+      const randomAlert = sampleDiseaseAlerts[
+        Math.floor(Math.random() * sampleDiseaseAlerts.length)
+      ];
+      setDiseaseAlert(randomAlert);
+      
+      // Auto-hide after 10 seconds
+      setTimeout(() => {
+        setDiseaseAlert(null);
+      }, 10000);
+    }, 120000);
+
+    return () => clearInterval(alertInterval);
+  }, [userLocation]);
 
   const getWeatherIcon = () => {
     switch(weather.condition) {
@@ -188,12 +250,31 @@ function Dashboard() {
     const randomPesticide = pesticides[Math.floor(Math.random() * pesticides.length)];
     const severity = ['Low', 'Medium', 'High'][Math.floor(Math.random() * 3)];
     
-    setPesticideResult({
+    const result = {
       pest: randomPest,
       severity: severity,
       recommendedPesticide: randomPesticide,
       application: `Apply ${randomPesticide.name} every ${[3,5,7,10][Math.floor(Math.random() * 4)]} days for ${[1,2,3][Math.floor(Math.random() * 3)]} weeks`
-    });
+    };
+    
+    setPesticideResult(result);
+
+    // If severity is high, create an alert for nearby farms
+    if (severity === 'High') {
+      const alert = {
+        id: Date.now(),
+        disease: randomPest,
+        district: userLocation,
+        date: new Date().toISOString().split('T')[0],
+        severity: 'High',
+        distance: `${Math.floor(Math.random() * 20) + 1} km`,
+        farmsAffected: Math.floor(Math.random() * 10) + 1,
+        recommendedAction: result.application
+      };
+      
+      setDiseaseAlert(alert);
+      setTimeout(() => setDiseaseAlert(null), 10000);
+    }
   };
 
   const handlePriceSubmit = (e) => {
@@ -229,15 +310,84 @@ function Dashboard() {
     setShowSchemes(!showSchemes);
   };
 
+  const toggleAlerts = () => {
+    setShowAlerts(!showAlerts);
+  };
+
+  const dismissAlert = () => {
+    setDiseaseAlert(null);
+  };
+
   return (
     <div className="dashboard-container">
-      <div className="dashboard-header">
-        <h1 className="dashboard-title">Agriculture Intelligence Dashboard</h1>
-        <button onClick={toggleSchemes} className="schemes-btn">
-          <FaRupeeSign /> Tamil Nadu Schemes
-        </button>
-      </div>
-      
+      {/* Disease Alert Notification */}
+      {diseaseAlert && (
+        <div className="disease-alert">
+          <div className="alert-content">
+            <div className="alert-header">
+              <FaBell className="alert-icon" />
+              <h3>Disease Alert Nearby!</h3>
+              <button onClick={dismissAlert} className="alert-close">×</button>
+            </div>
+            <p>
+              <strong>{diseaseAlert.disease}</strong> detected in {diseaseAlert.district} district 
+              ({diseaseAlert.distance} from you).
+            </p>
+            <p><strong>Severity:</strong> <span className={`severity-${diseaseAlert.severity.toLowerCase()}`}>
+              {diseaseAlert.severity}
+            </span></p>
+            <p><strong>Recommended Action:</strong> {diseaseAlert.recommendedAction}</p>
+            <button onClick={toggleAlerts} className="view-all-btn">
+              View All Alerts
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Disease Alerts Modal */}
+      {showAlerts && (
+        <div className="alerts-modal">
+          <div className="alerts-content">
+            <h2><FaBell color="#d32f2f" /> Disease Alerts in Tamil Nadu</h2>
+            <button className="close-btn" onClick={toggleAlerts}>×</button>
+            
+            <div className="location-selector">
+              <label>
+                <FaMapMarkerAlt /> Your Location:
+                <select 
+                  value={userLocation}
+                  onChange={(e) => setUserLocation(e.target.value)}
+                >
+                  {tamilNaduDistricts.map(district => (
+                    <option key={district} value={district}>{district}</option>
+                  ))}
+                </select>
+              </label>
+            </div>
+            
+            <div className="alerts-list">
+              {sampleDiseaseAlerts.map(alert => (
+                <div key={alert.id} className={`alert-card ${alert.district === userLocation ? 'local-alert' : ''}`}>
+                  <div className="alert-card-header">
+                    <h3>{alert.disease}</h3>
+                    <span className={`severity-badge severity-${alert.severity.toLowerCase()}`}>
+                      {alert.severity}
+                    </span>
+                  </div>
+                  <div className="alert-card-body">
+                    <p><strong>Location:</strong> {alert.district} ({alert.distance} from you)</p>
+                    <p><strong>Date Reported:</strong> {alert.date}</p>
+                    <p><strong>Farms Affected:</strong> {alert.farmsAffected}</p>
+                    <p><strong>Action Recommended:</strong> {alert.recommendedAction}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Schemes Modal */}
       {showSchemes && (
         <div className="schemes-modal">
           <div className="schemes-content">
@@ -257,6 +407,13 @@ function Dashboard() {
           </div>
         </div>
       )}
+
+      <div className="dashboard-header">
+        <h1 className="dashboard-title">Agriculture Intelligence Dashboard</h1>
+        <button onClick={toggleSchemes} className="schemes-btn">
+          <FaRupeeSign /> Tamil Nadu Schemes
+        </button>
+      </div>
 
       <div className="dashboard-grid">
         {/* Weather Widget */}
